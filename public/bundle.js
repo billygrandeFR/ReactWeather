@@ -26714,18 +26714,34 @@
 /* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(1);
 
 	var WeatherMessage = function WeatherMessage(props) {
 	  return React.createElement(
-	    'h2',
+	    "div",
 	    null,
-	    'It\'s ',
-	    props.propTemp,
-	    ' in ',
-	    props.propLocation
+	    React.createElement(
+	      "h2",
+	      null,
+	      "It's ",
+	      props.propTemp,
+	      " in ",
+	      props.propLocation
+	    ),
+	    React.createElement("br", null),
+	    React.createElement("br", null),
+	    React.createElement("br", null),
+	    React.createElement("br", null),
+	    React.createElement("br", null),
+	    React.createElement("br", null),
+	    React.createElement("br", null),
+	    React.createElement("br", null),
+	    React.createElement("img", { src: "./images/billy.gif" }),
+	    React.createElement("br", null),
+	    React.createElement("br", null),
+	    React.createElement("iframe", { width: "560", height: "315", src: "https://www.youtube.com/embed/hxgamUDbJjE", frameborder: "0", allowfullscreen: true })
 	  );
 	};
 
