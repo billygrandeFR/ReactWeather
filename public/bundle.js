@@ -53,7 +53,8 @@
 	    Route = _require.Route,
 	    Router = _require.Router,
 	    IndexRoute = _require.IndexRoute,
-	    hashHistory = _require.hashHistory;
+	    hashHistory = _require.hashHistory,
+	    browserHistory = _require.browserHistory;
 
 	var Main = __webpack_require__(233);
 	var Weather = __webpack_require__(235);
@@ -62,7 +63,7 @@
 
 	ReactDOM.render(React.createElement(
 	  Router,
-	  { history: hashHistory },
+	  { history: browserHistory },
 	  React.createElement(
 	    Route,
 	    { path: '/', component: Main },
