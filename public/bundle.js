@@ -26645,7 +26645,13 @@
 
 	  onSearch: function onSearch(e) {
 	    e.preventDefault();
-	    alert('Not yet wired up!');
+	    var location = this.refs.search.value;
+	    var encodedLocation = encodeURIComponent(location);
+
+	    if (location.length > 0) {
+	      this.refs.search.value = '';
+	      window.location.hash = '#/?location=' + encodedLocation;
+	    }
 	  },
 	  render: function render() {
 	    return React.createElement(
@@ -26692,23 +26698,26 @@
 	        )
 	      ),
 	      React.createElement(
-	        'div',
-	        { className: 'top-bar-right' },
+	        'form',
+	        { onSubmit: this.onSearch },
 	        React.createElement(
-	          'ul',
-	          { className: 'menu' },
+	          'div',
+	          { className: 'top-bar-right' },
 	          React.createElement(
-	            'li',
-	            null,
-	            React.createElement('input', { type: 'search', placeholder: 'Search weather' })
-	          ),
-	          React.createElement(
-	            'li',
-	            null,
-	            React.createElement('input', { type: 'submit', className: 'button', value: 'Get weather' })
+	            'ul',
+	            { className: 'menu' },
+	            React.createElement(
+	              'li',
+	              null,
+	              React.createElement('input', { ref: 'search', type: 'search', placeholder: 'Search weather' })
+	            ),
+	            React.createElement(
+	              'li',
+	              null,
+	              React.createElement('input', { type: 'submit', className: 'button', value: 'Get weather' })
+	            )
 	          )
-	        ),
-	        React.createElement('form', { onSubmit: this.onSearch })
+	        )
 	      )
 	    );
 	  }
@@ -26742,7 +26751,9 @@
 
 	    this.setState({
 	      isLoading: true,
-	      errorMessage: undefined
+	      errorMessage: undefined,
+	      location: undefined,
+	      temp: undefined
 	    });
 
 	    openWeatherMap.getTemp(location).then(function (temp) {
@@ -26761,6 +26772,23 @@
 	      location: location,
 	      temp: 23
 	    });*/
+	  },
+	  componentDidMount: function componentDidMount() {
+	    var location = this.props.location.query.location;
+
+	    if (location && location.length > 0) {
+	      this.handleSearch(location);
+	      window.location.hash = '#/';
+	    }
+	  },
+
+	  componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+	    var location = newProps.location.query.location;
+
+	    if (location && location.length > 0) {
+	      this.handleSearch(location);
+	      window.location.hash = '#/';
+	    }
 	  },
 	  render: function render() {
 	    var _state = this.state,
@@ -28934,7 +28962,7 @@
 
 
 	// module
-	exports.push([module.id, ".page-title {\n  margin-top: 2.5rem;\n  margin-bottom: 2.5rem;\n}\n\ninput[type=search] {\n  box-shadow: none;\n}\n", ""]);
+	exports.push([module.id, "\n\n.page-title {\n  color: #555;\n  margin-top: 2.5rem;\n  margin-bottom: 2.5rem;\n}\n\ninput[type=search] {\n  box-shadow: none;\n}\n", ""]);
 
 	// exports
 
